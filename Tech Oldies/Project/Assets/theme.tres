@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=2]
+
+[resource]
+/colors/Black = Color( 0, 0, 0, 1 )
+/colors/Blue = Color( 0, 0.0156863, 1, 1 )
+/colors/Grey = Color( 0.568627, 0.568627, 0.568627, 1 )

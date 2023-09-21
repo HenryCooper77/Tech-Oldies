@@ -1,6 +1,6 @@
 extends Node2D
 
-var main_menu = preload("res://Scenes/Main Menu.tscn").instance()
+var main_menu = preload("res://Scenes/Mouse Lesson.tscn").instance()
 onready var title_timer = $InitTimer
 onready var splash_init = $SplashInit
 onready var background = $Background
@@ -24,4 +24,6 @@ func _process(delta):
 		background.z_index = 1
 		print("goofy or pete")
 		
+	if already_done == true:
+		initiate()
 		
