@@ -1,11 +1,13 @@
 extends Node2D
 
 var phys_mouse_pos = Vector2()
+var clickedon = null
 onready var mouse = $Mouse
 onready var open = $Mouse/open
 onready var lmb = $Mouse/left
 onready var rmb = $Mouse/right
 onready var scr = $Mouse/scroll
+onready var click = $Mouse/clickzone
 
 func _ready():
 	#sets mouse to unclicked
@@ -19,7 +21,8 @@ func _ready():
 	scr.z_index = 1
 	
 func lmb():
-	pass
+	clickedon = click.get_overlapping_areas()
+	print(clickedon)
 	
 func rmb():
 	pass
