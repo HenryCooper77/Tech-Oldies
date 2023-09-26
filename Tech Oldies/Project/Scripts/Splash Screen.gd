@@ -1,6 +1,6 @@
 extends Node2D
 
-var main_menu = preload("res://Scenes/Mouse Lesson.tscn").instance()
+var main_menu = preload("res://Scenes/Move The Mouse.tscn").instance()
 onready var title_timer = $InitTimer
 onready var splash_init = $SplashInit
 onready var background = $Background

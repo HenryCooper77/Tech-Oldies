@@ -6,15 +6,27 @@ onready	var rmb = $Rmb
 onready	var scr = $Scr
 
 func _ready():
-	blank.z_index = 4
+	lmb.hide()
+	rmb.hide()
+	scr.hide()
 	lmb.z_index = 3
 	rmb.z_index = 2
 	scr.z_index = 1
+	blank.z_index = 0
 	
 func _process(delta):
-	if Input.is_action_just_released("lmb"):
+	if Input.is_action_pressed("lmb"):
 		print("lmb")
-	if Input.is_action_just_released("rmb"):
+		lmb.show()
+	else:
+		lmb.hide()
+	if Input.is_action_pressed("rmb"):
 		print("rmb")
-	if Input.is_action_just_released("scr"):
+		rmb.show()
+	else:
+		lmb.hide()
+	if Input.is_action_pressed("scr"):
 		print("scr")
+		rmb.show()
+	else:
+		scr.hide()
