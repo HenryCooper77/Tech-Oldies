@@ -2,60 +2,76 @@ extends Node2D
 
 var phys_mouse_pos = Vector2()
 var clickedon = null
+var typeofclick = null
 onready var mouse = $Mouse
 onready var open = $Mouse/open
-onready var lmb = $Mouse/left
-onready var rmb = $Mouse/right
-onready var scr = $Mouse/scroll
+onready var leftmb = $Mouse/left
+onready var rightmb = $Mouse/right
+onready var scroll = $Mouse/scroll
 onready var click = $Mouse/clickzone
+onready var testapp = $TestApp
 
 func _ready():
 	#sets mouse to unclicked
 	open.show()
-	lmb.hide()
-	rmb.hide()
-	scr.hide()
+	leftmb.hide()
+	rightmb.hide()
+	scroll.hide()
 	open.z_index = 4
-	lmb.z_index = 3
-	rmb.z_index = 2
-	scr.z_index = 1
+	leftmb.z_index = 3
+	rightmb.z_index = 2
+	scroll.z_index = 1
 	
 func lmb():
-	clickedon = click.get_overlapping_areas()
-	print(clickedon)
-	
+	if click.overlaps_body(testapp):
+		#picklebear contributed by Maddox Curren
+		print("picklebear:")
+		typeofclick = "left"
+		clickedapp()
+
 func rmb():
-	pass
-
-func scr():
-	pass
-
+	if click.overlaps_body(testapp):
+		#teachereatingchildren contributed by Maddox Curren
+		print("teachereatingchildren:")
+		typeofclick = "right"
+		clickedapp()
+	
+func notclicked():
+	typeofclick = "null"
+	
+func clickedapp():
+	#shnoogle contributed by Maddox Curren
+	print("shnoogle", typeofclick)
+		
 func _process(delta):
 	#moves mouse to the proper position
 	phys_mouse_pos = get_viewport().get_mouse_position()
-	print(phys_mouse_pos)
 	mouse.position = phys_mouse_pos
 	#click animation
 	if Input.is_action_pressed("lmb"):
-		lmb.show()
+		leftmb.show()
 		open.hide()
-		rmb.hide()
-		scr.hide()
-		lmb()
+		rightmb.hide()
+		scroll.hide()
 	elif Input.is_action_pressed("rmb"):
-		lmb.hide()
+		leftmb.hide()
 		open.hide()
-		rmb.show()
-		scr.hide()
-		rmb()
+		rightmb.show()
+		scroll.hide()
 	elif Input.is_action_pressed("scr"):
-		lmb.hide()
+		leftmb.hide()
 		open.hide()
-		rmb.hide()
-		scr.show()
-		scr()
+		rightmb.hide()
+		scroll.show()
 	else:
-		lmb.hide()
+		leftmb.hide()
 		open.show()
-		rmb.hide()
-		scr.hide()
+		rightmb.hide()
+		scroll.hide()
+	#click funtion
+	if Input.is_action_just_released("lmb"):	
+		lmb()
+	elif Input.is_action_just_released("rmb"):
+		rmb()
+	else:
+		notclicked()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Move The Mouse.gd" type="Script" id=1]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=2]
@@ -6,10 +6,13 @@
 [ext_resource path="res://Assets/lmb.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Tech Oldies Background.jpg" type="Texture" id=5]
 [ext_resource path="res://Assets/rmb.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Default App.JPG" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
 height = 36.0
+
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Move The Mouse" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,6 +36,8 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
 [node name="clickzone" type="Area2D" parent="Mouse"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse/clickzone"]
 position = Vector2( 0, -7 )
@@ -41,3 +46,16 @@ shape = SubResource( 1 )
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 480, 360 )
 texture = ExtResource( 5 )
+
+[node name="TestApp" type="KinematicBody2D" parent="."]
+position = Vector2( 480, 360 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="TestApp"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp"]
+scale = Vector2( 5, 5 )
+shape = SubResource( 2 )
