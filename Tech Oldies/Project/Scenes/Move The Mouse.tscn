@@ -1,23 +1,33 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scenes/Move The Mouse.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Move The Mouse.gd" type="Script" id=1]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=2]
 [ext_resource path="res://Assets/scr.png" type="Texture" id=3]
 [ext_resource path="res://Assets/lmb.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Tech Oldies Background.jpg" type="Texture" id=5]
 [ext_resource path="res://Assets/rmb.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Default App.JPG" type="Texture" id=7]
+[ext_resource path="res://Assets/Example App Internals.jpg" type="Texture" id=8]
+[ext_resource path="res://Assets/Slider.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
 height = 36.0
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.3, 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15.5, 15 )
+
+[sub_resource type="RectangleShape2D" id=4]
 
 [node name="Move The Mouse" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Mouse" type="KinematicBody2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 4095
 
 [node name="open" type="Sprite" parent="Mouse"]
 scale = Vector2( 0.3, 0.3 )
@@ -47,15 +57,44 @@ shape = SubResource( 1 )
 position = Vector2( 480, 360 )
 texture = ExtResource( 5 )
 
+[node name="TestAppIcon" type="KinematicBody2D" parent="."]
+position = Vector2( 480, 360 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="TestAppIcon"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestAppIcon"]
+scale = Vector2( 5, 5 )
+shape = SubResource( 2 )
+
 [node name="TestApp" type="KinematicBody2D" parent="."]
 position = Vector2( 480, 360 )
 collision_layer = 2
 collision_mask = 2
 
 [node name="Sprite" type="Sprite" parent="TestApp"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+z_index = 2
+texture = ExtResource( 8 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp"]
-scale = Vector2( 5, 5 )
-shape = SubResource( 2 )
+[node name="Close" type="KinematicBody2D" parent="TestApp"]
+collision_layer = 4095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/Close"]
+position = Vector2( 224.5, -165 )
+shape = SubResource( 3 )
+
+[node name="Slider" type="KinematicBody2D" parent="TestApp"]
+collision_layer = 4095
+
+[node name="Sprite" type="Sprite" parent="TestApp/Slider"]
+position = Vector2( -150, 71 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/Slider"]
+position = Vector2( -150, 71 )
+shape = SubResource( 4 )
