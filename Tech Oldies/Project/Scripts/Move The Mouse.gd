@@ -3,6 +3,7 @@ extends Node2D
 var phys_mouse_pos = Vector2()
 var clickedon = null
 var typeofclick = null
+var togglestate = 0
 onready var mouse = $Mouse
 onready var open = $Mouse/open
 onready var leftmb = $Mouse/left
@@ -12,7 +13,7 @@ onready var click = $Mouse/clickzone
 onready var defaultappicon = $TestAppIcon
 onready var defaultapp = $TestApp
 onready var closedefaultapp = $TestApp/Close
-onready var slider = $TestApp/Slider
+onready var toggle = $TestApp/Toggle
 
 func _ready():
 	#sets mouse to unclicked
@@ -38,6 +39,10 @@ func lmb():
 		print("flegitbear:")
 		typeofclick = "left"
 		closedapp()
+	elif click.overlaps_body(toggle):
+		#frigglehair contributed by Maddox Curren
+		print("frigglehair:")
+		toggle()
 
 func rmb():
 	if click.overlaps_body(defaultappicon):
@@ -62,8 +67,13 @@ func clickedapp():
 func closedapp():
 		defaultapp.hide()
 		
-func slider():
-	pass
+func toggle():
+	if togglestate == 0:
+		togglestate = 1
+		#change the sprite
+	elif togglestate == 1:
+		togglestate = 0
+		#change the sprite
 	
 func _process(delta):
 	#moves mouse to the proper position
