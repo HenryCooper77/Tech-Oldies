@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Move The Mouse.gd" type="Script" id=1]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Assets/Default App.JPG" type="Texture" id=7]
 [ext_resource path="res://Assets/Example App Internals.JPG" type="Texture" id=8]
 [ext_resource path="res://Assets/Toggle Off.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Toggle On.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Settings Icon.JPG" type="Texture" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
@@ -71,6 +73,19 @@ texture = ExtResource( 7 )
 scale = Vector2( 5, 5 )
 shape = SubResource( 2 )
 
+[node name="SettingsAppIcon" type="KinematicBody2D" parent="."]
+position = Vector2( 280, 360 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite" type="Sprite" parent="SettingsAppIcon"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SettingsAppIcon"]
+scale = Vector2( 5, 5 )
+shape = SubResource( 2 )
+
 [node name="TestApp" type="KinematicBody2D" parent="."]
 position = Vector2( 480, 360 )
 collision_layer = 2
@@ -87,15 +102,18 @@ collision_layer = 4095
 position = Vector2( 224.5, -165 )
 shape = SubResource( 3 )
 
-[node name="Toggle" type="KinematicBody2D" parent="TestApp"]
+[node name="SettingsToggle" type="KinematicBody2D" parent="TestApp"]
 position = Vector2( -145, 60 )
 scale = Vector2( 0.65, 0.65 )
 z_index = 3
 collision_layer = 4095
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/Toggle"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/SettingsToggle"]
 position = Vector2( -1.5, -1 )
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="TestApp/Toggle"]
+[node name="Off" type="Sprite" parent="TestApp/SettingsToggle"]
 texture = ExtResource( 9 )
+
+[node name="On" type="Sprite" parent="TestApp/SettingsToggle"]
+texture = ExtResource( 10 )

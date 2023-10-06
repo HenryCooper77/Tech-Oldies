@@ -3,17 +3,25 @@ extends Node2D
 var phys_mouse_pos = Vector2()
 var clickedon = null
 var typeofclick = null
-var togglestate = 0
+var settingstogglestate = 0
+#mouse preloads
 onready var mouse = $Mouse
 onready var open = $Mouse/open
 onready var leftmb = $Mouse/left
 onready var rightmb = $Mouse/right
 onready var scroll = $Mouse/scroll
 onready var click = $Mouse/clickzone
+#testapp preloads
 onready var defaultappicon = $TestAppIcon
 onready var defaultapp = $TestApp
 onready var closedefaultapp = $TestApp/Close
-onready var toggle = $TestApp/Toggle
+onready var settingstoggle = $TestApp/SettingsToggle
+onready var toggleoffsprite = $TestApp/SettingsToggle/Off
+onready var toggleonsprite = $TestApp/SettingsToggle/On
+#settingsapp preload
+onready var settingsappicon = $SettingsAppIcon
+onready var settingsapp = null
+onready var closesettingsapp = null
 
 func _ready():
 	#sets mouse to unclicked
@@ -23,6 +31,9 @@ func _ready():
 	rightmb.hide()
 	scroll.hide()
 	defaultapp.hide()
+	toggleoffsprite.show()
+	toggleonsprite.hide()
+	settingsappicon.hide()
 	open.z_index = 14
 	leftmb.z_index = 13
 	rightmb.z_index = 12
@@ -39,10 +50,10 @@ func lmb():
 		print("flegitbear:")
 		typeofclick = "left"
 		closedapp()
-	elif click.overlaps_body(toggle):
+	elif click.overlaps_body(settingstoggle):
 		#frigglehair contributed by Maddox Curren
 		print("frigglehair:")
-		toggle()
+		settingstoggle()
 
 func rmb():
 	if click.overlaps_body(defaultappicon):
@@ -67,13 +78,17 @@ func clickedapp():
 func closedapp():
 		defaultapp.hide()
 		
-func toggle():
-	if togglestate == 0:
-		togglestate = 1
-		#change the sprite
-	elif togglestate == 1:
-		togglestate = 0
-		#change the sprite
+func settingstoggle():
+	if settingstogglestate == 0:
+		settingstogglestate = 1
+		toggleoffsprite.hide()
+		toggleonsprite.show()
+		settingsappicon.show()
+	elif settingstogglestate == 1:
+		settingstogglestate = 0
+		toggleonsprite.hide()
+		toggleoffsprite.show()
+		settingsappicon.hide()
 	
 func _process(delta):
 	#moves mouse to the proper position
