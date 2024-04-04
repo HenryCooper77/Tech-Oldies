@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Casa-Bossa-Nova.mp3-e26fb11a5635f9e7da4c0e26d6ef410d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Casa-Bossa-Nova.mp3"
+dest_files=[ "res://.import/Casa-Bossa-Nova.mp3-e26fb11a5635f9e7da4c0e26d6ef410d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

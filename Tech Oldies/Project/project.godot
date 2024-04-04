@@ -11,13 +11,22 @@ config_version=4
 [application]
 
 config/name="Tech Oldies"
-run/main_scene="res://Scenes/Splash Screen.tscn"
+run/main_scene="res://Scenes/Move The Mouse.tscn"
 config/icon="res://Assets/Logo.JPG"
+
+[autoload]
+
+GlobalVariables="*res://Scripts/Global Variables.gd"
 
 [display]
 
 window/size/width=960
 window/size/height=720
+window/size/resizable=false
+
+[global]
+
+text=true
 
 [gui]
 
@@ -38,6 +47,16 @@ rmb={
 scr={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+"debug mode"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Search={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

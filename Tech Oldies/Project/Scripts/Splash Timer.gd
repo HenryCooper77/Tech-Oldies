@@ -1,13 +1,18 @@
-extends Timer
+extends KinematicBody2D
 
+onready var timer = $Timer
 var timer_done = false
+var hidden = false
 
 func _ready():
-	#"glorbus" contributed by Maddox Curren
-	print("glorbus")
-	wait_time = 5
-	one_shot = true
-	autostart = true
+	timer.wait_time = 2
+	timer.one_shot = true
+	timer.autostart = true
+	show()
 func _process(delta):
-	if time_left == 0:
+	if timer.time_left == 0 and hidden == false:
 		timer_done = true
+		hide()
+		#"glorbus" contributed by Maddox Curren
+		print("glorbus")
+		hidden = true

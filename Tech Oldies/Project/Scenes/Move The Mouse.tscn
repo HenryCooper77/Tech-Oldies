@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Move The Mouse.gd" type="Script" id=1]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=2]
@@ -11,21 +11,31 @@
 [ext_resource path="res://Assets/Toggle Off.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Toggle On.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Settings Icon.JPG" type="Texture" id=11]
+[ext_resource path="res://Assets/Settings internals.JPG" type="Texture" id=12]
+[ext_resource path="res://Assets/Casa-Bossa-Nova.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Wallpaper2.JPG" type="Texture" id=14]
+[ext_resource path="res://Assets/Selector3.JPG" type="Texture" id=15]
+[ext_resource path="res://Assets/Wallpaper3.JPG" type="Texture" id=16]
+[ext_resource path="res://Assets/Selector1.JPG" type="Texture" id=17]
+[ext_resource path="res://Assets/Selector2.JPG" type="Texture" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
 height = 36.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3.3, 3 )
+extents = Vector2( 9.7, 9.6 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15.5, 15 )
+extents = Vector2( 17.75, 18.25 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 49.5, 37 )
 
-[node name="Move The Mouse" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24, 18 )
+
+[node name="MoveTheMouse" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Mouse" type="KinematicBody2D" parent="."]
@@ -49,19 +59,32 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
 [node name="clickzone" type="Area2D" parent="Mouse"]
-collision_layer = 2
+collision_layer = 15
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse/clickzone"]
 position = Vector2( 0, -7 )
 shape = SubResource( 1 )
 
-[node name="Background" type="Sprite" parent="."]
+[node name="wallpaper1" type="Sprite" parent="."]
 position = Vector2( 480, 360 )
+z_index = -1
 texture = ExtResource( 5 )
 
+[node name="wallpaper2" type="Sprite" parent="."]
+position = Vector2( 458.5, 367 )
+scale = Vector2( 23.1875, 21.1111 )
+z_index = -2
+texture = ExtResource( 14 )
+
+[node name="wallpaper3" type="Sprite" parent="."]
+position = Vector2( 458, 369 )
+scale = Vector2( 23.875, 21.6667 )
+z_index = -3
+texture = ExtResource( 16 )
+
 [node name="TestAppIcon" type="KinematicBody2D" parent="."]
-position = Vector2( 480, 360 )
+position = Vector2( 100, 100 )
 collision_layer = 2
 collision_mask = 2
 
@@ -74,7 +97,7 @@ scale = Vector2( 5, 5 )
 shape = SubResource( 2 )
 
 [node name="SettingsAppIcon" type="KinematicBody2D" parent="."]
-position = Vector2( 280, 360 )
+position = Vector2( 100, 250 )
 collision_layer = 2
 collision_mask = 2
 
@@ -83,11 +106,12 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SettingsAppIcon"]
+position = Vector2( 0.5, 3.05176e-05 )
 scale = Vector2( 5, 5 )
 shape = SubResource( 2 )
 
 [node name="TestApp" type="KinematicBody2D" parent="."]
-position = Vector2( 480, 360 )
+position = Vector2( 720, 180 )
 collision_layer = 2
 collision_mask = 2
 
@@ -99,7 +123,7 @@ texture = ExtResource( 8 )
 collision_layer = 4095
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/Close"]
-position = Vector2( 224.5, -165 )
+position = Vector2( 222.25, -161.75 )
 shape = SubResource( 3 )
 
 [node name="SettingsToggle" type="KinematicBody2D" parent="TestApp"]
@@ -108,7 +132,7 @@ scale = Vector2( 0.65, 0.65 )
 z_index = 3
 collision_layer = 4095
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestApp/SettingsToggle"]
+[node name="ToggleCollide" type="CollisionShape2D" parent="TestApp/SettingsToggle"]
 position = Vector2( -1.5, -1 )
 shape = SubResource( 4 )
 
@@ -117,3 +141,79 @@ texture = ExtResource( 9 )
 
 [node name="On" type="Sprite" parent="TestApp/SettingsToggle"]
 texture = ExtResource( 10 )
+
+[node name="SettingsApp" type="KinematicBody2D" parent="."]
+position = Vector2( 240, 540 )
+
+[node name="Sprite" type="Sprite" parent="SettingsApp"]
+z_index = 2
+texture = ExtResource( 12 )
+
+[node name="Close" type="KinematicBody2D" parent="SettingsApp"]
+collision_layer = 4095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SettingsApp/Close"]
+position = Vector2( 220, -158.5 )
+shape = SubResource( 3 )
+
+[node name="SoundToggle" type="KinematicBody2D" parent="SettingsApp"]
+position = Vector2( 75, -75 )
+scale = Vector2( 0.65, 0.65 )
+z_index = 3
+collision_layer = 4095
+
+[node name="ToggleCollide" type="CollisionShape2D" parent="SettingsApp/SoundToggle"]
+position = Vector2( -1.5, -1 )
+shape = SubResource( 4 )
+
+[node name="Off" type="Sprite" parent="SettingsApp/SoundToggle"]
+z_index = 1
+texture = ExtResource( 9 )
+
+[node name="On" type="Sprite" parent="SettingsApp/SoundToggle"]
+texture = ExtResource( 10 )
+
+[node name="FinishLesson" type="KinematicBody2D" parent="SettingsApp"]
+position = Vector2( 75, 45 )
+scale = Vector2( 0.65, 0.65 )
+z_index = 3
+collision_layer = 4095
+
+[node name="ToggleCollide" type="CollisionShape2D" parent="SettingsApp/FinishLesson"]
+position = Vector2( -1.5, -1 )
+shape = SubResource( 4 )
+
+[node name="Off" type="Sprite" parent="SettingsApp/FinishLesson"]
+z_index = 1
+texture = ExtResource( 9 )
+
+[node name="On" type="Sprite" parent="SettingsApp/FinishLesson"]
+texture = ExtResource( 10 )
+
+[node name="WallpaperSwap" type="KinematicBody2D" parent="SettingsApp"]
+position = Vector2( 75, -10 )
+z_index = 2
+
+[node name="one" type="Sprite" parent="SettingsApp/WallpaperSwap"]
+scale = Vector2( 1.25, 1.25 )
+z_index = 3
+texture = ExtResource( 17 )
+
+[node name="two" type="Sprite" parent="SettingsApp/WallpaperSwap"]
+scale = Vector2( 1.25, 1.25 )
+z_index = 2
+texture = ExtResource( 18 )
+
+[node name="three" type="Sprite" parent="SettingsApp/WallpaperSwap"]
+scale = Vector2( 1.25, 1.25 )
+z_index = 1
+texture = ExtResource( 15 )
+
+[node name="collider" type="CollisionShape2D" parent="SettingsApp/WallpaperSwap"]
+scale = Vector2( 1.25, 1.25 )
+z_index = 5
+z_as_relative = false
+shape = SubResource( 5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
